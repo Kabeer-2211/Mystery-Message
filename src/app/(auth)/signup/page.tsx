@@ -64,12 +64,12 @@ const Signup: React.FC = () => {
         setIsSubmitting(true);
         try {
             const response = await axios.post<ApiResponse>('/api/signup', data);
-            toast(response.data.message);
+            toast.success(response.data.message);
             router.replace(`/verify/${username}`);
         } catch (err) {
             console.log("Error in signup user");
             const axiosError = err as AxiosError<ApiResponse>;
-            toast(axiosError.response?.data.message || "Error in signup user");
+            toast.error(axiosError.response?.data.message ?? "Error in signup user");
         } finally {
             setIsSubmitting(false);
         }
@@ -142,7 +142,7 @@ const Signup: React.FC = () => {
                 <div className="text-center mt-4">
                     <p>
                         Already a member?{' '}
-                        <Link href="/sign-in" className="text-blue-600 hover:text-blue-800">
+                        <Link href="/signin" className="text-blue-600 hover:text-blue-800">
                             Sign in
                         </Link>
                     </p>

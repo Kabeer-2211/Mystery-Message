@@ -23,7 +23,7 @@ export async function GET() {
         }
         return Response.json({
             success: true,
-            isAcceptingMessages: foundUser.isAcceptingMessage
+            isAcceptingMessage: foundUser.isAcceptingMessage
         }, { status: 200 });
     } catch (err) {
         console.log("Error in get message status", err);

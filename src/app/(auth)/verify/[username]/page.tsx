@@ -12,26 +12,25 @@ import {
 import { ApiResponse } from '@/types/ApiResponse';
 import axios, { AxiosError } from 'axios';
 import { verifySchema } from '@/schemas/verifySchema';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 const VerifyAccount: React.FC = () => {
     const router = useRouter();
     const params = useParams<{ username: string }>();
-    const [isSubmitting, setIsSubmitting] = useState<React.ComponentState>(false);
-    const [code, setCode] = useState<React.ComponentState>("");
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
+    const { register, setValue } = useForm({
+        resolver: zodResolver(verifySchema)
+    })
 
     const onComplete = async (value: string) => {
         setIsSubmitting(true);
         try {
-            const validationResult = verifySchema.safeParse({ code: value });
-            if (validationResult.success) {
-                const response = await axios.post<ApiResponse>('/api/verify-code', { code: value, username: params.username });
-                if (response.data?.success) {
-                    router.replace(`/signin`);
-                    toast.success(response.data.message);
-                }
-            } else {
-                const error = validationResult.error.format()._errors[0];
-                toast.error(error);
+            const response = await axios.post<ApiResponse>('/api/verify-code', { code: value, username: params.username });
+            if (response.data?.success) {
+                router.replace(`/signin`);
+                toast.success(response.data.message);
             }
         } catch (err) {
             console.log("Error in signup user");
@@ -53,7 +52,7 @@ const VerifyAccount: React.FC = () => {
                     <p className="mb-4">Verify to start your anonymous adventure</p>
                 </div>
                 <div className="space-y-8 flex flex-col items-center">
-                    <InputOTP maxLength={6} disabled={isSubmitting} onComplete={onComplete} value={code} onChange={(value) => setCode(value)}>
+                    <InputOTP {...register('code')} maxLength={6} disabled={isSubmitting} onComplete={onComplete} onChange={(value) => setValue('code', value)}>
                         <InputOTPGroup>
                             <InputOTPSlot index={0} />
                             <InputOTPSlot index={1} />

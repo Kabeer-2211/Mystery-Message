@@ -8,7 +8,8 @@ import { acceptMessageSchema } from '@/schemas/acceptMessageSchema'
 import { ApiResponse } from '@/types/ApiResponse'
 import { zodResolver } from '@hookform/resolvers/zod'
 import axios, { AxiosError } from 'axios'
-import { Loader2, RefreshCcw } from 'lucide-react'
+import Link from 'next/link'
+import { Link as LinkIcon, Loader2, RefreshCcw } from 'lucide-react'
 import { useSession } from 'next-auth/react'
 import { useCallback, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -97,13 +98,8 @@ const Dashboard = () => {
 
       <div className="mb-4">
         <h2 className="text-lg font-semibold mb-2">Copy Your Unique Link</h2>
-        <div className="flex items-center">
-          <input
-            type="text"
-            value={profileUrl}
-            disabled
-            className="input input-bordered w-full p-2 mr-2"
-          />
+        <div className="flex justify-between items-center">
+          <Link href={profileUrl} target='_blank' className='flex items-center gap-1 font-semibold underline'><LinkIcon />{profileUrl}</Link>
           <Button onClick={copyToClipboard}>Copy</Button>
         </div>
       </div>

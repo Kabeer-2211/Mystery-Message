@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎉 **Mystery Message** 🎉
 
-## Getting Started
+Welcome to the **Mystery Message**! This project leverages **Next.js**, **TypeScript**, and **NextAuth** for secure OTP authentication and provides an interactive messaging system with advanced features like message management and suggestion functionality.
 
-First, run the development server:
+---
+
+## 🚀 **Features**
+
+- 🔐 **Secure OTP Authentication**: Users can register and log in with a One-Time Password (OTP) sent to their email, powered by **NextAuth**.
+  
+- 🗨️ **Message System**: Each user has a **unique URL** that allows others to send them messages.
+
+- 🔄 **Message Management**: Users can:
+  - **Refresh** their message list.
+  - **Delete** messages.
+  
+- 💬 **Message Status Toggle**: Users can toggle their message status to show whether they are accepting messages or not.
+
+- 💡 **Message Suggestions**: Senders can pick from **suggested messages** and click on the **suggest** button to get ai suggested messages easily.
+
+---
+
+## ⚡ **Getting Started**
+
+To get started with this project locally, follow the instructions below:
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/yourusername/nextjs-otp-auth-messaging.git
+cd nextjs-otp-auth-messaging
+```
+### 2. Install Dependencies
+
+```bash
+npm install
+```
+### 3. Set Up Environment Variables
+
+```bash
+NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_SECRET=your_secret_here
+NEXTAUTH_PROVIDER_GOOGLE_CLIENT_ID=your_google_client_id_here
+NEXTAUTH_PROVIDER_GOOGLE_CLIENT_SECRET=your_google_client_secret_here
+OTP_SECRET=your_otp_secret_here
+```
+### 4. Run The Application
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

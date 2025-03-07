@@ -4,14 +4,19 @@ export { default } from "next-auth/middleware";
 import { getToken } from "next-auth/jwt";
 
 export async function middleware(request: NextRequest) {
-  const token = await getToken({ req: request });
+  const token = await getToken({
+    req: request,
+    secret: process.env.NEXT_AUTH_SECRET,
+    cookieName: "next-auth.session-token",
+  });
   const url = request.nextUrl;
-  if (token) {
-    if (url.pathname.startsWith("/signin") ||
-      url.pathname.startsWith("/signup") ||
-      url.pathname.startsWith("/verify")) {
+  if (
+    token &&
+    (url.pathname.startsWith("/signin") ||
+      url.pathname.startsWith("/signip") ||
+      url.pathname.startsWith("/verify"))
+  ) {
     return NextResponse.redirect(new URL("/dashboard", request.url));
-    }
   }
   if (!token && url.pathname.startsWith("/dashboard")) {
     return NextResponse.redirect(new URL("/signin", request.url));
